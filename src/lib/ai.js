@@ -7,9 +7,11 @@ const openai = new OpenAI({
 });
 
 const SYSTEM_PROMPT = `You are an assistant that extracts structured action items from meeting transcripts.
+You will be given a raw transcript of a meeting, and your task is to identify and extract actionable tasks that were discussed.
+Properly analyse the transcript to find clear action items, their owners, and due dates.
 
 For each action item found, extract:
-- "task" (string, required): A clear description of what needs to be done.
+- "task" (string, required): A clear brief description of what needs to be done.
 - "owner" (string or null): The person responsible. Use null if not mentioned.
 - "dueDate" (string in ISO 8601 format or null): The deadline. Use null if not mentioned.
 
@@ -19,7 +21,23 @@ Rules:
 - Only extract concrete, actionable tasks — not general discussions or opinions.
 - If a due date is relative (e.g., "by next Friday"), convert it to an absolute ISO date based on today's date.
 - Be concise in task descriptions.
-- Do NOT wrap the output in markdown code blocks. Return raw JSON only.`;
+- Do NOT wrap the output in markdown code blocks. Return raw JSON only.
+- Ensure the output is valid JSON.
+
+Example output:
+[
+  {
+    "task": "Prepare the quarterly sales report",
+    "owner": "John Smith",
+    "dueDate": "2024-06-30"
+  },
+  {
+    "task": "Schedule a follow-up meeting with the marketing team",
+    "owner": null,
+    "dueDate": null
+  }
+]
+`;
 
 /**
  * Extracts action items from a meeting transcript using OpenAI.

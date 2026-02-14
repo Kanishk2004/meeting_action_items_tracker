@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import TranscriptForm from '@/components/TranscriptForm';
 import ActionItemCard from '@/components/ActionItemCard';
+import Walkthrough from '@/components/Walkthrough';
 
 export default function Home() {
 	const router = useRouter();
@@ -32,6 +33,8 @@ export default function Home() {
 
 	return (
 		<div className="space-y-10">
+			<Walkthrough />
+
 			{/* Header */}
 			<div>
 				<h1 className="text-3xl font-bold tracking-tight">

@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
+import Footer from "@/components/Footer";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -21,7 +22,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-surface text-text-primary`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased flex min-h-screen flex-col bg-surface text-text-primary`}
       >
         <nav className="sticky top-0 z-50 border-b border-border bg-surface/80 backdrop-blur-md">
           <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-6">
@@ -32,15 +33,19 @@ export default function RootLayout({ children }) {
               <Link href="/" className="text-text-secondary transition-colors hover:text-orange-accent">
                 Extract
               </Link>
+              <Link href="/status" className="text-text-secondary transition-colors hover:text-orange-accent">
+                Status
+              </Link>
               <Link href="/history" className="rounded-lg bg-orange-accent px-4 py-2 font-semibold text-black transition-colors hover:bg-orange-hover">
                 History
               </Link>
             </div>
           </div>
         </nav>
-        <main className="mx-auto max-w-5xl px-6 py-10">
+        <main className="mx-auto w-full max-w-5xl flex-grow px-6 py-10">
           {children}
         </main>
+        <Footer />
       </body>
     </html>
   );
